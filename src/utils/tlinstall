@@ -1,0 +1,2 @@
+#!/bin/ash
+/usr/local/bin/tlmgr install $(cat $1 | tr '\n' ' ')
