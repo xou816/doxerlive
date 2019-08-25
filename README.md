@@ -1,6 +1,6 @@
 # DoXeR Live
 
-[![](https://images.microbadger.com/badges/image/atrendel/tinytex.svg)](https://microbadger.com/images/atrendel/tinytex "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/atrendel/doxerlive.svg)](https://microbadger.com/images/atrendel/doxerlive "Get your own image badge on microbadger.com")
 
 A minimal LaTeX distribution based on Alpine, strongly inspired by [Tiny TeX](https://yihui.name/tinytex/faq/). 
 
