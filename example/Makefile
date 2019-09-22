@@ -1,10 +1,14 @@
 all: install build
 
 build: doc.tex
-	latexmk -f -pdf doc.tex
+	latexmk
+	latexmk -c
 
-install: pkgs.txt
-	tlinstall pkgs.txt
+watch: doc.tex
+	latexmk -pvc
+
+install:
+	tlmgr install fontawesome
 
 clean: 
-	latexmk -c
+	latexmk -C

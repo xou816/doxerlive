@@ -4,24 +4,28 @@ ENV TLURL="http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz"
 ENV TEXLIVE_INSTALL_ENV_NOCHECK=true
 ENV TEXLIVE_INSTALL_NO_WELCOME=true
 
+# Dependencies
+# libgcc still needed for some dependencies (which ones exactly?)
 RUN apk add perl wget freetype fontconfig gnupg libgcc make su-exec xz
-RUN mkdir -p /usr/local/texlive
 
+# Install texlive
+RUN mkdir -p /usr/local/texlive
 WORKDIR /usr/local/texlive
 COPY texlive.profile texlive.profile
 RUN wget $TLURL && tar -xzf install-tl-unx.tar.gz && \
 	./install-tl-*/install-tl -v -profile=texlive.profile && \
 	rm -r ./install-tl-* texlive.profile install-tl.log
 
-WORKDIR /usr/local/texlive/bin/x86_64-linuxmusl
-RUN ./tlmgr update --self && \
-	./tlmgr option repository ctan && \
-	./tlmgr install tex latexmk ifluatex ifxetex latex-bin luatex xetex && \
-	./tlmgr path add
+# Fix path and install latexmk
+ENV PATH=$PATH:/usr/local/texlive/bin/x86_64-linuxmusl
+RUN	tlmgr option repository ctan && \
+	tlmgr install latexmk
 
-COPY utils/tlinstall /usr/local/bin/tlinstall
-RUN chmod +x /usr/local/bin/tlinstall
+# Fonts setup
+COPY 09-texlive-fonts.conf /etc/fonts/conf.d/09-texlive-fonts.conf
+RUN chmod a+w /var/cache/fontconfig
 
+# Entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
