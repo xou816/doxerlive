@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.15
 
 ENV TLURL="http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz"
 ENV TEXLIVE_INSTALL_ENV_NOCHECK=true
