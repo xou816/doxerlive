@@ -12,7 +12,7 @@ See included example:
 
 ```
 cd example
-docker run -e THEUID=`id -u $USER` -v $PWD:/var/doxerlive atrendel/doxerlive:9-basic
+docker run -e THEUID=`id -u $USER` -v $PWD:/var/doxerlive atrendel/doxerlive:15-basic
 ```
 
 The `THEUID` variable makes sure processes inside the container run using the same UID as your user on the host system.
@@ -25,7 +25,7 @@ You may also attach to the container and running with the "preview continuously"
 
 ```
 cd example
-docker run --it -e THEUID=`id -u $USER` -v $PWD:/var/doxerlive atrendel/doxerlive:9-basic ash # launch ash shell
+docker run --it -e THEUID=`id -u $USER` -v $PWD:/var/doxerlive atrendel/doxerlive:15-basic ash # launch ash shell
 ```
 
 Then, from inside the container:
@@ -39,6 +39,6 @@ make watch
 All images run `make` with UID `$THEUID` by default.
 
 Tags:
-- `9-infraonly`: base image with Alpine 3.9, almost no packages and only essential binaires
-- `9-basic`: larger image with basic utilities on top of `9-infraonly`
+- `15-infraonly`: base image with Alpine 3.15, almost no packages and only essential binaires
+- `15-basic`: larger image with basic utilities on top of `15-infraonly`
 
